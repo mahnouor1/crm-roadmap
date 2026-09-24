@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Outreach CRM — Build Roadmap</title>
+<meta name="description" content="Technical roadmap and architecture for an AI-powered email outreach CRM: lead verification, campaign dispatch, and AI-personalized outreach, built as real infrastructure." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">AI Outreach CRM</span>
+    <div class="nav-links">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#stack">Stack</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#verification">Verification</a>
+      <a href="#repo">Repo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="status-pill">Build status: Core pipeline working</div>
+  <h1>AI Outreach CRM</h1>
+  <p class="subtitle">From lead verification to AI-personalized email outreach, built as real infrastructure.</p>
+</header>
+
+<main>
+
+  <section id="roadmap" class="section">
+    <h2>Roadmap</h2>
+    <p class="section-lede">Five phases, tracked as they're actually built — not as a plan.</p>
+
+    <ol class="timeline">
+
+      <li class="phase">
+        <div class="phase-head">
+          <span class="phase-num">01</span>
+          <h3>Lead Pipeline</h3>
+          <span class="badge done">Done</span>
+        </div>
+        <ul class="phase-list">
+          <li>CSV / XLSX import</li>
+          <li>Normalization</li>
+          <li>Deduplication</li>
+          <li>ICP / industry qualification</li>
+          <li>Website validation</li>
+          <li>MX checks</li>
+          <li>SMTP mailbox verification</li>
+          <li>Qualification states</li>
+        </ul>
+      </li>
+
+      <li class="phase">
+        <div class="phase-head">
+          <span class="phase-num">02</span>
+          <h3>CRM</h3>
+          <span class="badge done">Done</span>
+        </div>
+        <ul class="phase-list">
+          <li>Leads</li>
+          <li>Campaigns</li>
+          <li>ICP configuration</li>
+          <li>Lead assignment</li>
+          <li>Lead activity / status</li>
+          <li>Qualification evidence</li>
+          <li>Campaign eligibility</li>
+        </ul>
+        <p class="phase-note">CRM is the source of truth.</p>
+      </li>
+
+      <li class="phase">
+        <div class="phase-head">
+          <span class="phase-num">03</span>
+          <h3>Outreach Engine</h3>
+          <span class="badge done">Done</span>
+        </div>
+        <ul class="phase-list">
+          <li>Atomic lead dispatch</li>
+          <li>Lead claiming</li>
+          <li>Duplicate-dispatch protection</li>
+          <li>Stale claim recovery</li>
+          <li>Campaign-based assignment</li>
+          <li>SENT status tracking</li>
+          <li>Idempotent webhook handling</li>
+        </ul>
+      </li>
+
+      <li class="phase">
+        <div class="phase-head">
+          <span class="phase-num">04</span>
+          <h3>AI Email Workflow</h3>
+          <span class="badge done">Done</span>
+        </div>
+        <p class="phase-flow">CRM &rarr; n8n &rarr; Gemini &rarr; Email &rarr; CRM</p>
+        <ul class="phase-list">
+          <li>CRM selects eligible leads</li>
+          <li>n8n orchestrates execution</li>
+          <li>Gemini generates personalized openings</li>
+          <li>Email infrastructure sends</li>
+          <li>CRM records the result</li>
+        </ul>
+        <p class="phase-note">n8n is the orchestration layer — not the database.</p>
+      </li>
+
+      <li class="phase">
+        <div class="phase-head">
+          <span class="phase-num">05</span>
+          <h3>Production Deployment</h3>
+          <span class="badge done">Done</span>
+        </div>
+        <ul class="phase-list">
+          <li>Production CRM deployed</li>
+          <li>Isolated PM2 process</li>
+          <li>Dedicated port</li>
+          <li>Caddy reverse proxy</li>
+          <li>HTTPS</li>
+          <li>Basic authentication on CRM pages</li>
+          <li>Protected dispatch / webhook endpoints</li>
+          <li>Existing applications isolated from deployment</li>
+        </ul>
+      </li>
+
+    </ol>
+  </section>
+
+  <section id="stack" class="section">
+    <h2>Stack</h2>
+    <p class="section-lede">Only what's actually running in production.</p>
+
+    <div class="stack-grid">
+      <div class="stack-group">
+        <h4>Application</h4>
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">TypeScript</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>Data</h4>
+        <div class="chips">
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Supabase</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>Automation &amp; AI</h4>
+        <div class="chips">
+          <span class="chip">n8n</span>
+          <span class="chip">Gemini</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>Verification</h4>
+        <div class="chips">
+          <span class="chip">Go</span>
+          <span class="chip">SMTP worker</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>Infra</h4>
+        <div class="chips">
+          <span class="chip">Caddy</span>
+          <span class="chip">PM2</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>This site</h4>
+        <div class="chips">
+          <span class="chip">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" class="section">
+    <h2>Architecture</h2>
+    <p class="section-lede">One path, one direction, one source of truth.</p>
+
+    <div class="diagram">
+      <div class="node">Lead Source</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">CRM</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">Qualification + Verification</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">Campaign</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">Atomic Dispatch</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">n8n</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">Gemini</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">Email</div>
+      <div class="arrow">&darr;</div>
+      <div class="node">CRM</div>
+    </div>
+
+    <div class="roles">
+      <div class="role"><strong>CRM</strong><span>source of truth</span></div>
+      <div class="role"><strong>n8n</strong><span>orchestration</span></div>
+      <div class="role"><strong>Gemini</strong><span>personalization</span></div>
+    </div>
+  </section>
+
+  <section id="verification" class="section">
+    <h2>Verification layer</h2>
+    <p class="section-lede">Mailbox verification and domain authentication are separate problems.</p>
+
+    <div class="compare compare-single">
+      <div class="compare-col">
+        <span class="badge done">Today</span>
+        <h4>MX + SMTP</h4>
+        <p>Confirms a mail server exists for the domain, and probes whether the specific mailbox accepts mail.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Campaign lifecycle</h2>
+
+    <div class="lifecycle">
+      <span>Campaign</span><span class="sep">&rarr;</span>
+      <span>Eligible leads</span><span class="sep">&rarr;</span>
+      <span>Assignment</span><span class="sep">&rarr;</span>
+      <span>Dispatch</span><span class="sep">&rarr;</span>
+      <span>Personalization</span><span class="sep">&rarr;</span>
+      <span>Send</span><span class="sep">&rarr;</span>
+      <span class="done-step">SENT</span>
+    </div>
+
+    <div class="planned-block">
+      <span class="badge planned">Planned</span>
+      <ul class="phase-list">
+        <li>Bounce / event processing</li>
+        <li>Reply tracking</li>
+        <li>Follow-ups</li>
+        <li>Campaign analytics</li>
+        <li>Domain authentication signals</li>
+        <li>More advanced campaign controls</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="repo" class="section">
+    <h2>Code / Infrastructure</h2>
+    <p class="section-lede">Private repository — not yet published.</p>
+    <div class="repo-card">
+      <code>skimmy-outreach-dashboard</code>
+      <span class="repo-note">Local project, no public URL yet.</span>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
